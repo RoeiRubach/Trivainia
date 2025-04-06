@@ -4,10 +4,10 @@ using System.Linq;
 
 namespace Trivainia
 {
-    public class StateMachine
+    public sealed class StateMachine
     {
         private StateNode _activeNode;
-        private readonly List<Transition> _globalTransitions = new();
+        private readonly List<StateTransition> _globalTransitions = new();
         private readonly Dictionary<Type, StateNode> _stateNodes = new();
 
         public void Update()
@@ -27,10 +27,10 @@ namespace Trivainia
             _activeNode.State?.OnEnter();
         }
 
-        public void AddGlobalTransition(IState to, IPredicateStrategy condition) => _globalTransitions.Add(new Transition(GetOrCreateNode(to).State, condition));
+        public void AddGlobalTransition(IState to, IPredicateStrategy condition) => _globalTransitions.Add(new StateTransition(GetOrCreateNode(to).State, condition));
         public void AddTransition(IState from, IState to, IPredicateStrategy condition) => GetOrCreateNode(from).AddTransition(GetOrCreateNode(to).State, condition);
 
-        private Transition FindValidTransition()
+        private StateTransition FindValidTransition()
         {
             foreach (var transition in _globalTransitions.Where(transition => transition.Condition.Evaluate()))
                 return transition;
@@ -93,15 +93,15 @@ namespace Trivainia
         private class StateNode
         {
             public IState State { get; }
-            public HashSet<Transition> Transitions { get; }
+            public HashSet<StateTransition> Transitions { get; }
 
             public StateNode(IState state)
             {
                 State = state;
-                Transitions = new HashSet<Transition>();
+                Transitions = new HashSet<StateTransition>();
             }
 
-            public void AddTransition(IState to, IPredicateStrategy condition) => Transitions.Add(new Transition(to, condition));
+            public void AddTransition(IState to, IPredicateStrategy condition) => Transitions.Add(new StateTransition(to, condition));
         }
     }
 }

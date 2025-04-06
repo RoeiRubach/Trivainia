@@ -1,11 +1,11 @@
 ﻿namespace Trivainia
 {
-    public sealed class Transition
+    public sealed class StateTransition
     {
         public IState To { get;}
         public IPredicateStrategy Condition { get; }
 
-        public Transition(IState to, IPredicateStrategy condition)
+        public StateTransition(IState to, IPredicateStrategy condition)
         {
             To = to;
             Condition = condition;

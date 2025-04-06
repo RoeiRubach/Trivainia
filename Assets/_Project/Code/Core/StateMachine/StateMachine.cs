@@ -6,68 +6,69 @@ namespace Trivainia
 {
     public class StateMachine
     {
-        private StateNode _currentNode;
+        private StateNode _activeNode;
         private readonly List<Transition> _globalTransitions = new();
-        private readonly Dictionary<Type, StateNode> _nodes = new();
+        private readonly Dictionary<Type, StateNode> _stateNodes = new();
 
         public void Update()
         {
-            var transition = ProcessTransitions();
-            if (transition != null)
-                ChangeState(transition.To);
+            var validTransition = FindValidTransition();
+            if (validTransition != null)
+                SwitchState(validTransition.To);
 
-            _currentNode.State?.Update();
+            _activeNode.State?.Update();
         }
 
-        public void FixedUpdate() => _currentNode.State?.FixedUpdate();
+        public void FixedUpdate() => _activeNode.State?.FixedUpdate();
 
         public void SetState(IState state)
         {
-            _currentNode = _nodes[state.GetType()];
-            _currentNode.State?.OnEnter();
+            _activeNode = _stateNodes[state.GetType()];
+            _activeNode.State?.OnEnter();
         }
 
-        public void AddGlobalTransition(IState to, IPredicateStrategy condition) => _globalTransitions.Add(new Transition(GetOrAddNode(to).State, condition));
-        public void AddTransition(IState from, IState to, IPredicateStrategy condition) => GetOrAddNode(from).AddTransition(GetOrAddNode(to).State, condition);
+        public void AddGlobalTransition(IState to, IPredicateStrategy condition) => _globalTransitions.Add(new Transition(GetOrCreateNode(to).State, condition));
+        public void AddTransition(IState from, IState to, IPredicateStrategy condition) => GetOrCreateNode(from).AddTransition(GetOrCreateNode(to).State, condition);
 
-        private Transition ProcessTransitions()
+        private Transition FindValidTransition()
         {
             foreach (var transition in _globalTransitions.Where(transition => transition.Condition.Evaluate()))
                 return transition;
 
-            return _currentNode.Transitions.FirstOrDefault(transition => transition.Condition.Evaluate());
+            return _activeNode.Transitions.FirstOrDefault(transition => transition.Condition.Evaluate());
         }
 
-        private void ChangeState(IState state)
+        private void SwitchState(IState state)
         {
-            if (IsTryingToChangeToSameState(state))
+            if (IsSameState(state))
                 return;
 
-            var previousActiveState = _currentNode;
-            var nextState = _nodes[state.GetType()].State;
+            var previousState = _activeNode;
+            var nextNode = _stateNodes[state.GetType()];
+            var nextState = nextNode.State;
 
-            previousActiveState.State?.OnExit();
+            previousState.State?.OnExit();
             nextState.OnEnter();
-            _currentNode = _nodes[state.GetType()];
+            _activeNode = nextNode;
         }
 
-        private bool IsTryingToChangeToSameState(IState state)
+        private bool IsSameState(IState state)
         {
-            if (!_currentNode.State.IsComposite)
-                return _currentNode.State == state;
+            if (!_activeNode.State.IsComposite)
+                return _activeNode.State == state;
 
-            return CompareDeepestStatesInComposite(_currentNode.State, state);
+            return AreDeepestStatesEqual(_activeNode.State, state);
         }
 
-        private static bool CompareDeepestStatesInComposite(IState rootState, IState targetState)
+        private static bool AreDeepestStatesEqual(IState rootState, IState targetState)
         {
-            var compositeState = rootState as ICompositeState;
-            var subStates = compositeState.SubStates;
+            var composite = rootState as ICompositeState;
+            var subStates = composite.SubStates;
 
             foreach (var subState in subStates)
                 if (subState.IsComposite)
                 {
-                    if (CompareDeepestStatesInComposite(subState, targetState))
+                    if (AreDeepestStatesEqual(subState, targetState))
                         return true;
                 }
                 else if (subState == targetState)
@@ -78,14 +79,12 @@ namespace Trivainia
             return false;
         }
 
-        private StateNode GetOrAddNode(IState state)
+        private StateNode GetOrCreateNode(IState state)
         {
-            var node = _nodes.GetValueOrDefault(state.GetType());
-
-            if (node == null)
+            if (!_stateNodes.TryGetValue(state.GetType(), out var node))
             {
                 node = new StateNode(state);
-                _nodes[state.GetType()] = node;
+                _stateNodes[state.GetType()] = node;
             }
 
             return node;

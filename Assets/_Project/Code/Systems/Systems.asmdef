@@ -1,18 +1,18 @@
 {
-    "name": "Systems",
-    "rootNamespace": "",
-    "references": [
-        "GUID:1be710f55ec798546b9327af977807eb",
-        "GUID:1cdc8601f06188d4199f03a7e3219b30",
-        "GUID:5919eb5cfa5169b4487250aff925e87a"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "Systems",
+  "rootNamespace": "",
+  "references": [
+    "GUID:1be710f55ec798546b9327af977807eb",
+    "GUID:1cdc8601f06188d4199f03a7e3219b30",
+    "GUID:5919eb5cfa5169b4487250aff925e87a"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }

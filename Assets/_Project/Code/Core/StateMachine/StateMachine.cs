@@ -7,8 +7,8 @@ namespace Trivainia
     public sealed class StateMachine
     {
         private StateNode _activeNode;
-        private readonly List<StateTransition> _globalTransitions = new();
         private readonly Dictionary<Type, StateNode> _stateNodes = new();
+        private readonly List<StateTransition> _globalTransitions = new();
 
         public void Update()
         {

@@ -1,4 +1,6 @@
-﻿namespace Trivainia.Utilities
+﻿using UnityEngine;
+
+namespace Trivainia.Utilities
 {
     public interface ITimeService
     {
@@ -9,11 +11,10 @@
 
     public class UnityTime : ITimeService
     {
-        public float GetTime() => UnityEngine.Time.time;
+        public float GetTime() => Time.time;
 
-        public float GetDeltaTime() => UnityEngine.Time.deltaTime;
+        public float GetDeltaTime() => Time.deltaTime;
 
-        public float GetFixedDeltaTime() => UnityEngine.Time.fixedDeltaTime;
+        public float GetFixedDeltaTime() => Time.fixedDeltaTime;
     }
-
 }

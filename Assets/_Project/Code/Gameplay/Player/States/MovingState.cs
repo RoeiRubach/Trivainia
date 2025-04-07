@@ -1,13 +1,12 @@
 ﻿using Trivainia.Utilities;
 using UnityEngine;
-using UnityUtils;
 
 namespace Trivainia
 {
     public class MovingState : BaseState
     {
-        private readonly IMovementService _movement;
         private readonly IInputReader _input;
+        private readonly IMovementService _movement;
         private readonly Rigidbody _rb;
         private readonly ITimeService _timeService;
 
@@ -28,9 +27,10 @@ namespace Trivainia
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            
-            var inputDirection = _input.Direction.With(y: 0);
-            var targetVelocity = _movement.ComputeLocomotion(inputDirection);
+
+            var direction = _input.Direction;
+            var horizontalDirection = new Vector3(direction.x, 0, direction.y);
+            var targetVelocity = _movement.ComputeLocomotion(horizontalDirection);
             _currentVelocity = _movement.SmoothVelocity(_currentVelocity, targetVelocity);
 
             var newPosition = _rb.position + _currentVelocity * _timeService.GetFixedDeltaTime();

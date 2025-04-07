@@ -1,5 +1,4 @@
 namespace Trivainia
 {
-    public class IdleState : BaseState
-    { }
+    public class IdleState : BaseState { }
 }

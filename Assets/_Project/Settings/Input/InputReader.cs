@@ -9,7 +9,7 @@ namespace Trivainia
     public class InputReader : ScriptableObject, IPlayerActions, IInputReader
     {
         public event UnityAction<Vector2> Move = delegate { };
-        
+
         private PlayerInputActions _inputActions;
 
         private void OnEnable()
@@ -19,15 +19,11 @@ namespace Trivainia
             _inputActions = new PlayerInputActions();
             _inputActions.Player.SetCallbacks(this);
         }
-        
-        public Vector3 Direction
-        {
-            get => _inputActions.Player.Move.ReadValue<Vector2>();
-        }
-        
-        public void OnMove(InputAction.CallbackContext context)
-        {
-            Move.Invoke(context.ReadValue<Vector2>());
-        }
+
+        public Vector3 Direction => _inputActions.Player.Move.ReadValue<Vector2>();
+
+        public void EnableActions() => _inputActions.Enable();
+
+        public void OnMove(InputAction.CallbackContext context) => Move.Invoke(context.ReadValue<Vector2>());
     }
 }

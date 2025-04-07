@@ -3,7 +3,7 @@ using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 
-namespace Trivainia
+namespace Trivainia.Utilities
 {
     public static class ConsoleLogger
     {

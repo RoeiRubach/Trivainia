@@ -14,29 +14,27 @@ namespace Trivainia.Utilities
         private const string TRACE_COLOR = "#A9A9A9";
         private const string MISSING_REF_COLOR = "#FFA500";
 
-        private enum LogType { Info, Warning, Error }
+        [Conditional("ENABLE_LOGS")]
+        public static void Print(string message, Object context = null) => Log(LogType.Info, "ℹ\ufe0f INFO", message, INFO_COLOR, context);
 
         [Conditional("ENABLE_LOGS")]
-        public static void Print(string message, Object context = null) => Log(LogType.Info, "INFO", message, INFO_COLOR, context);
+        public static void PrintError(string message, Object context = null) => Log(LogType.Error, "\u274c ERROR", message, ERROR_COLOR, context);
 
         [Conditional("ENABLE_LOGS")]
-        public static void PrintError(string message, Object context = null) => Log(LogType.Error, "ERROR", message, ERROR_COLOR, context);
+        public static void PrintWarning(string message, Object context = null) => Log(LogType.Warning, "\u26a0\ufe0f WARNING", message, WARNING_COLOR, context);
 
         [Conditional("ENABLE_LOGS")]
-        public static void PrintWarning(string message, Object context = null) => Log(LogType.Warning, "WARNING", message, WARNING_COLOR, context);
-
-        [Conditional("ENABLE_LOGS")]
-        public static void PrintNullObject(string message, Object context = null) => Log(LogType.Warning, "NULL", $"Null Reference Detected → {message}", NULL_COLOR, context);
+        public static void PrintNullObject(string message, Object context = null) => Log(LogType.Warning, "\ud83d\udeab NULL", $"Null Reference Detected → {message}", NULL_COLOR, context);
 
         [Conditional("ENABLE_LOGS")]
         public static void PrintStackTrace(string message, Object context = null)
         {
             var fullMessage = $"{message}\n<color=#{TRACE_COLOR}>{Environment.StackTrace}</color>";
-            Log(LogType.Info, "TRACE", fullMessage, TRACE_COLOR, context);
+            Log(LogType.Info, "\ud83e\uddf5 TRACE", fullMessage, TRACE_COLOR, context);
         }
 
         [Conditional("ENABLE_LOGS")]
-        public static void PrintInspectorRefMissing(string message, Object context = null) => Log(LogType.Warning, "INSPECTOR", $"Missing Reference → {message}", MISSING_REF_COLOR, context);
+        public static void PrintInspectorRefMissing(string message, Object context = null) => Log(LogType.Warning, "\ud83e\udde9 INSPECTOR", $"Missing Reference → {message}", MISSING_REF_COLOR, context);
 
         private static void Log(LogType type, string prefix, string message, string color, Object context)
         {
@@ -58,5 +56,7 @@ namespace Trivainia.Utilities
                     break;
             }
         }
+
+        private enum LogType { Info, Warning, Error }
     }
 }

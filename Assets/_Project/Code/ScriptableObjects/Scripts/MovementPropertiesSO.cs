@@ -6,20 +6,15 @@ namespace Trivainia
     [CreateAssetMenu(fileName = "MovementPropertiesSO", menuName = "Scriptable Objects/MovementPropertiesSO")]
     public class MovementPropertiesSO : ScriptableObject
     {
-        [BoxGroup("Speed Settings")]
-        [LabelText("Movement Speed")]
+        [BoxGroup("Speed Settings"), MinValue(1)]
         public float MoveSpeed = 5f;
         //public float SprintSpeed = 8f;
-        
-        [BoxGroup("Speed Settings")]
-        [LabelText("Rotation Speed")]
+        [BoxGroup("Speed Settings"), MinValue(1)]
         public float RotationSpeed = 5f;
-        
-        [BoxGroup("Acceleration Settings")]
-        [LabelText("Acceleration")]
+
+        [BoxGroup("Acceleration Settings"), MinValue(1)]
         public float Acceleration = 10f;
-        [BoxGroup("Acceleration Settings")]
-        [LabelText("Deceleration")]
+        [BoxGroup("Acceleration Settings"), MinValue(1)]
         public float Deceleration = 10f;
     }
 }

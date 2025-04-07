@@ -1,3 +1,4 @@
 {
-	"name": "Core"
+	"name": "Core",
+	"references":[ "GUID:1cdc8601f06188d4199f03a7e3219b30" ]
 }

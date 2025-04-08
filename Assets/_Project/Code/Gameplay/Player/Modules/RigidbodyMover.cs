@@ -16,10 +16,7 @@ namespace Trivainia
             movement.FinalVelocityComputed += OnFinalVelocityComputed;
         }
 
-        private void OnFinalVelocityComputed(Vector3 velocity)
-        {
-            HandleHorizontalMovement(velocity);
-        }
+        private void OnFinalVelocityComputed(Vector3 velocity) => HandleHorizontalMovement(velocity);
 
         private void HandleHorizontalMovement(Vector3 velocity)
         {

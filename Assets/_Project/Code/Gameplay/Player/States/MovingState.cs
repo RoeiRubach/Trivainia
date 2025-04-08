@@ -43,12 +43,11 @@ namespace Trivainia
             return cameraRotation * direction;
         }
 
-        private void UpdateRotation(Vector3 direction) => _currentRotation = _movement.ComputeRotation(_currentRotation, direction);
+        private void UpdateRotation(Vector3 direction) => _currentRotation = _movement.ComputeSmoothRotation(_currentRotation, direction);
 
         private void UpdateVelocity(Vector3 direction)
         {
-            var targetVelocity = _movement.ComputeLocomotion(direction);
-            _currentVelocity = _movement.SmoothVelocity(_currentVelocity, targetVelocity);
+            _currentVelocity = _movement.ComputeSmoothedVelocity(direction, _currentVelocity);
         }
     }
 }

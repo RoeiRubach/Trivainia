@@ -26,18 +26,18 @@ namespace Trivainia
 
         public Vector3 GetZeroVelocity() => Vector3.zero;
 
-        public Vector3 ComputeLocomotion(Vector3 direction) => direction * (PhysicsMoveSpeed * _timeService.GetFixedDeltaTime());
-
-        public Vector3 SmoothVelocity(Vector3 currentVelocity, Vector3 targetVelocity)
+        public Vector3 ComputeSmoothedVelocity(Vector3 direction, Vector3 currentVelocity)
         {
-            var accel = targetVelocity == Vector3.zero
+            var targetVelocity = direction * (PhysicsMoveSpeed * _timeService.GetFixedDeltaTime());
+
+            var acceleration = targetVelocity == Vector3.zero
                 ? PhysicsDeceleration
                 : PhysicsAcceleration;
 
             var smoothedVelocity = Vector3.MoveTowards(
                 currentVelocity,
                 targetVelocity,
-                accel * _timeService.GetFixedDeltaTime()
+                acceleration * _timeService.GetFixedDeltaTime()
             );
 
             FinalVelocityComputed?.Invoke(smoothedVelocity);
@@ -45,7 +45,8 @@ namespace Trivainia
             return smoothedVelocity;
         }
 
-        public Quaternion ComputeRotation(Quaternion currentRotation, Vector3 direction)
+
+        public Quaternion ComputeSmoothRotation(Quaternion currentRotation, Vector3 direction)
         {
             if (direction == Vector3.zero)
                 return currentRotation;

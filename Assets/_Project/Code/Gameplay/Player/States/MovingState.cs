@@ -1,40 +1,54 @@
-﻿using Trivainia.Utilities;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Trivainia
 {
     public class MovingState : BaseState
     {
+        private readonly Transform _mainCamera;
         private readonly IInputReader _input;
         private readonly IMovementService _movement;
-        private readonly Rigidbody _rb;
-        private readonly ITimeService _timeService;
 
         private Vector3 _currentVelocity;
+        private Quaternion _currentRotation;
 
-        public MovingState(
-            Rigidbody rb,
-            IInputReader input,
-            MovementPropertiesSO config,
-            ITimeService timeService)
+        public MovingState(IInputReader input, IMovementService movement, Transform mainCamera)
         {
-            _rb = rb;
             _input = input;
-            _timeService = timeService;
-            _movement = new SimpleMovement(timeService, config);
+            _movement = movement;
+            _mainCamera = mainCamera;
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
-            var direction = _input.Direction;
-            var horizontalDirection = new Vector3(direction.x, 0, direction.y);
-            var targetVelocity = _movement.ComputeLocomotion(horizontalDirection);
-            _currentVelocity = _movement.SmoothVelocity(_currentVelocity, targetVelocity);
+            var inputDirection = GetInputDirection();
+            var worldDirection = GetCameraAdjustedDirection(inputDirection);
 
-            var newPosition = _rb.position + _currentVelocity * _timeService.GetFixedDeltaTime();
-            _rb.MovePosition(newPosition);
+            UpdateRotation(worldDirection);
+            UpdateVelocity(worldDirection);
+        }
+
+        private Vector3 GetInputDirection()
+        {
+            var input = _input.Direction;
+            return new Vector3(input.x, 0f, input.y);
+        }
+
+        private Vector3 GetCameraAdjustedDirection(Vector3 direction)
+        {
+            var cameraYaw = _mainCamera.eulerAngles.y;
+            var cameraRotation = Quaternion.AngleAxis(cameraYaw, Vector3.up);
+
+            return cameraRotation * direction;
+        }
+
+        private void UpdateRotation(Vector3 direction) => _currentRotation = _movement.ComputeRotation(_currentRotation, direction);
+
+        private void UpdateVelocity(Vector3 direction)
+        {
+            var targetVelocity = _movement.ComputeLocomotion(direction);
+            _currentVelocity = _movement.SmoothVelocity(_currentVelocity, targetVelocity);
         }
     }
 }

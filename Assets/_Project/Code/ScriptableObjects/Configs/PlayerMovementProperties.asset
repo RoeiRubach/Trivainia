@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerMovementProperties
   m_EditorClassIdentifier: 
   MoveSpeed: 5
-  RotationSpeed: 5
-  Acceleration: 10
-  Deceleration: 10
+  RotationSpeed: 7.5
+  Acceleration: 1
+  Deceleration: 1

@@ -1,3 +1,4 @@
+using System;
 using Trivainia.Utilities;
 using UnityEngine;
 
@@ -5,6 +6,9 @@ namespace Trivainia
 {
     public class SimpleMovement : IMovementService
     {
+        public event Action<Vector3> FinalVelocityComputed;
+        public event Action<Quaternion> RotationComputed;
+
         private const float PHYSICS_MULTIPLIER = 100f;
         private readonly MovementPropertiesSO _config;
         private readonly ITimeService _timeService;
@@ -16,6 +20,7 @@ namespace Trivainia
         }
 
         private float PhysicsMoveSpeed => _config.MoveSpeed * PHYSICS_MULTIPLIER;
+        private float PhysicsRotationSpeed => _config.RotationSpeed * PHYSICS_MULTIPLIER;
         private float PhysicsAcceleration => _config.Acceleration * PHYSICS_MULTIPLIER;
         private float PhysicsDeceleration => _config.Deceleration * PHYSICS_MULTIPLIER;
 
@@ -29,11 +34,15 @@ namespace Trivainia
                 ? PhysicsDeceleration
                 : PhysicsAcceleration;
 
-            return Vector3.MoveTowards(
+            var smoothedVelocity = Vector3.MoveTowards(
                 currentVelocity,
                 targetVelocity,
                 accel * _timeService.GetFixedDeltaTime()
             );
+
+            FinalVelocityComputed?.Invoke(smoothedVelocity);
+
+            return smoothedVelocity;
         }
 
         public Quaternion ComputeRotation(Quaternion currentRotation, Vector3 direction)
@@ -43,11 +52,14 @@ namespace Trivainia
 
             var targetRotation = Quaternion.LookRotation(direction);
 
-            return Quaternion.RotateTowards(
+            var smoothedRotation = Quaternion.RotateTowards(
                 currentRotation,
                 targetRotation,
-                _config.RotationSpeed * _timeService.GetDeltaTime()
+                PhysicsRotationSpeed * _timeService.GetDeltaTime()
             );
+
+            RotationComputed?.Invoke(smoothedRotation);
+            return smoothedRotation;
         }
     }
 }

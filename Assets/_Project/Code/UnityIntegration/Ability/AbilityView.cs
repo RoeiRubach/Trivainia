@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sirenix.Serialization;
 using UnityEngine;
 
 namespace Trivainia
@@ -8,14 +7,13 @@ namespace Trivainia
     public class AbilityView : MonoBehaviour
     {
         public AbilityButton[] Buttons;
-        [OdinSerialize] private IInputReader _input;
         private AbilityView _abilityViewImplementation;
 
-        private void Awake()
+        public void SetupButtons(IInputReader input)
         {
             for (var i = 0; i < Buttons.Length; i++)
             {
-                Buttons[i].Initialize(i, _input);
+                Buttons[i].Initialize(i, input);
                 UpdateRadial(0);
             }
         }

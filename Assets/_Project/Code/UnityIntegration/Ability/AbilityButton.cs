@@ -1,4 +1,6 @@
 using System;
+using Sirenix.OdinInspector;
+using Trivainia.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +8,7 @@ namespace Trivainia
 {
     public class AbilityButton : MonoBehaviour
     {
-        [SerializeField] private int _index;
+        [SerializeField, ReadOnly] private int _index;
         [SerializeField] private Image _radialImage;
         [SerializeField] private Image _abilityIcon;
 
@@ -15,7 +17,11 @@ namespace Trivainia
         private void OnEnable() => GetComponent<Button>().onClick.AddListener(OnButtonClicked);
         private void OnDisable() => GetComponent<Button>().onClick.RemoveAllListeners();
 
-        private void OnButtonClicked() => OnButtonPressed?.Invoke(_index);
+        private void OnButtonClicked()
+        {
+            ConsoleLogger.Print($"Ability index {_index} been pressed");
+            OnButtonPressed?.Invoke(_index);
+        }
 
         public void RegisterListener(Action<int> listener) => OnButtonPressed += listener;
 

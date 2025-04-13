@@ -65,7 +65,10 @@ namespace Trivainia
                 return this;
             }
 
-            public AbilityController Build(AbilityView view) => new(view, _model);
+            public AbilityController Build(AbilityView view)
+            {
+                return new AbilityController(view, _model);
+            }
         }
     }
 }

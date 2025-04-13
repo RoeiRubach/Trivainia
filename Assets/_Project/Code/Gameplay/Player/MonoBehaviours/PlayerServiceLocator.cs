@@ -25,7 +25,7 @@ namespace Trivainia
             Input = _inputReaderSO as IInputReader;
             MovementService = new SimpleMovement(TimeService, MovementProperties);
         }
-        
+
         private bool ValidateInputReader(ScriptableObject so) => so is IInputReader;
     }
 }

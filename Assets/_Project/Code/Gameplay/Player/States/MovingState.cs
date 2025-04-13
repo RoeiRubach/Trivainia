@@ -32,6 +32,7 @@ namespace Trivainia
         private Vector3 GetInputDirection()
         {
             var input = _input.Direction;
+
             return new Vector3(input.x, 0f, input.y);
         }
 
@@ -45,9 +46,6 @@ namespace Trivainia
 
         private void UpdateRotation(Vector3 direction) => _currentRotation = _movement.ComputeSmoothRotation(_currentRotation, direction);
 
-        private void UpdateVelocity(Vector3 direction)
-        {
-            _currentVelocity = _movement.ComputeSmoothedVelocity(direction, _currentVelocity);
-        }
+        private void UpdateVelocity(Vector3 direction) => _currentVelocity = _movement.ComputeSmoothedVelocity(direction, _currentVelocity);
     }
 }

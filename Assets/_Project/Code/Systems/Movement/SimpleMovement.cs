@@ -45,7 +45,6 @@ namespace Trivainia
             return smoothedVelocity;
         }
 
-
         public Quaternion ComputeSmoothRotation(Quaternion currentRotation, Vector3 direction)
         {
             if (direction == Vector3.zero)
@@ -60,6 +59,7 @@ namespace Trivainia
             );
 
             RotationComputed?.Invoke(smoothedRotation);
+
             return smoothedRotation;
         }
     }

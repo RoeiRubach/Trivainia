@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Trivainia
 {
     public class AbilityView : MonoBehaviour
     {
-        public AbilityButton[] Buttons;
+        [field: SerializeField, ValidateInput(nameof(HasAtLeastOneButton), "At least one AbilityButton is required.")]
+        public AbilityButton[] Buttons { get; private set; }
+
         private AbilityView _abilityViewImplementation;
 
+        private bool HasAtLeastOneButton() => Buttons is {Length: > 0};
         public void SetupButtons(IInputReader input)
         {
             for (var i = 0; i < Buttons.Length; i++)

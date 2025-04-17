@@ -9,8 +9,9 @@ namespace Trivainia
     public class AbilityButton : MonoBehaviour
     {
         [SerializeField, ReadOnly] private int _index;
-        [SerializeField] private Image _radialImage;
-        [SerializeField] private Image _abilityIcon;
+        [SerializeField, Required] private Image _radialImage;
+        [SerializeField, Required] private Image _abilityIcon;
+        [SerializeField, Required] private Image _abilityInput;
 
         public event Action<int> OnButtonPressed = delegate { };
 
@@ -37,6 +38,12 @@ namespace Trivainia
         {
             if (_radialImage)
                 _radialImage.fillAmount = progress;
+        }
+
+        public void UpdateButtonInput(Sprite sprite)
+        {
+            if (_abilityInput)
+                _abilityInput.sprite = sprite;
         }
     }
 }

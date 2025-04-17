@@ -3,6 +3,7 @@ using Trivainia.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using static PlayerInputActions;
 
 namespace Trivainia
@@ -12,6 +13,9 @@ namespace Trivainia
     {
         public event UnityAction<Vector2> Move = delegate { };
         private readonly Action[] _skillActions = new Action[4];
+        public event Action<InputDeviceType> InputDeviceChanged = delegate { };
+
+        private InputDeviceType _lastUsedInputType = InputDeviceType.KeyboardMouse;
 
         private PlayerInputActions _inputActions;
 
@@ -21,6 +25,34 @@ namespace Trivainia
 
             _inputActions = new PlayerInputActions();
             _inputActions.Player.SetCallbacks(this);
+            InputSystem.onEvent += OnInputSystemEvent;
+        }
+
+        private void OnInputSystemEvent(InputEventPtr eventPtr, InputDevice device)
+        {
+            if (!eventPtr.IsA<StateEvent>() && !eventPtr.IsA<DeltaStateEvent>())
+                return;
+
+            switch (device)
+            {
+                case Gamepad:
+                    TrySetDevice(InputDeviceType.Gamepad);
+
+                    break;
+                case Keyboard or Mouse:
+                    TrySetDevice(InputDeviceType.KeyboardMouse);
+
+                    break;
+            }
+        }
+
+        private void TrySetDevice(InputDeviceType newInputType)
+        {
+            if (_lastUsedInputType == newInputType)
+                return;
+
+            _lastUsedInputType = newInputType;
+            InputDeviceChanged.Invoke(newInputType);
         }
 
         public Vector3 Direction => _inputActions.Player.Move.ReadValue<Vector2>();

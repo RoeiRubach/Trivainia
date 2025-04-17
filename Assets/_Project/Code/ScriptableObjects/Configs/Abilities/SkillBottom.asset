@@ -15,4 +15,5 @@ MonoBehaviour:
   AnimationClip: {fileID: 0}
   AnimationHash: 0
   Duration: 3
-  Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  QueueThreshold: 0.25
+  Icon: {fileID: 21300000, guid: ea8bd548fe4dfbb4cbafa032615a65c3, type: 3}

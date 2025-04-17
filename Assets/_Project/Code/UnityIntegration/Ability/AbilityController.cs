@@ -31,6 +31,7 @@ namespace Trivainia
                 button.RegisterListener(OnAbilityButtonPressed);
 
             _view.UpdateButtonSprites(_model.Abilities);
+            _view.UpdateButtonInputs(InputDeviceType.KeyboardMouse);
         }
 
         private void OnAbilityButtonPressed(int index)
@@ -40,7 +41,7 @@ namespace Trivainia
             if (!_model.TryGetAbility(index, out var ability))
                 return;
 
-            if (_cooldown.CanQueue(ability.Data.QueueThreshold))
+            if (_cooldown.CanQueue(ability.DataSo.QueueThreshold))
                 _queue.Enqueue(ability.CreateCommand());
 
             if (!_cooldown.IsRunning)
@@ -61,7 +62,7 @@ namespace Trivainia
         {
             private readonly AbilityModel _model = new();
 
-            public Builder WithAbilities(AbilityData[] abilitiesData)
+            public Builder WithAbilities(AbilityDataSO[] abilitiesData)
             {
                 foreach (var data in abilitiesData)
                     _model.Add(new Ability(data));

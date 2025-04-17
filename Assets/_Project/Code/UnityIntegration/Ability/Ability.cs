@@ -2,10 +2,10 @@
 {
     public class Ability
     {
-        public readonly AbilityData Data;
+        public readonly AbilityDataSO DataSo;
 
-        public Ability(AbilityData data) => Data = data;
+        public Ability(AbilityDataSO dataSo) => DataSo = dataSo;
 
-        public AbilityCommand CreateCommand() => new(Data);
+        public AbilityCommand CreateCommand() => new(DataSo);
     }
 }

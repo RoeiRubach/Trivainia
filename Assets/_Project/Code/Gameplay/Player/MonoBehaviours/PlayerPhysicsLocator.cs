@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Trivainia
 {
-    public class PlayerPhysicsInitializer : MonoBehaviour
+    public class PlayerPhysicsLocator : MonoBehaviour
     {
         [SerializeField, Required] private Rigidbody _rigidbody;
         [SerializeField, Required] private PlayerServiceLocator _locator;

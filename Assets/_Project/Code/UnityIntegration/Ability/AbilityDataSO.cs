@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Trivainia
 {
     [CreateAssetMenu(fileName = "AbilityData", menuName = "Scriptable Objects/AbilityData")]
-    public class AbilityData : ScriptableObject
+    public class AbilityDataSO : ScriptableObject
     {
         [VerticalGroup("row1/left")] public AnimationClip AnimationClip;
         [VerticalGroup("row1/left"), ReadOnly] public int AnimationHash;

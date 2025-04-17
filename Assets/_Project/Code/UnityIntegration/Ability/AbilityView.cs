@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -11,10 +12,13 @@ namespace Trivainia
         public AbilityButton[] Buttons { get; private set; }
 
         private AbilityView _abilityViewImplementation;
+        [SerializeField, Required] private PlayerInputSpritesLocator _inputSpritesLocator;
 
         private bool HasAtLeastOneButton() => Buttons is {Length: > 0};
-        public void SetupButtons(IInputReader input)
+        
+        public void SetupView(IInputReader input)
         {
+            input.InputDeviceChanged += UpdateButtonInputs;
             for (var i = 0; i < Buttons.Length; i++)
             {
                 Buttons[i].Initialize(i, input);
@@ -33,7 +37,19 @@ namespace Trivainia
         {
             for (var i = 0; i < Buttons.Length; i++)
                 if (i < abilities.Count)
-                    Buttons[i].UpdateButtonSprite(abilities[i].Data.Icon);
+                    Buttons[i].UpdateButtonSprite(abilities[i].DataSo.Icon);
         }
+
+        public void UpdateButtonInputs(InputDeviceType inputDeviceType)
+        {
+            var sprites = _inputSpritesLocator.GetSpritesClockwiseFromBottom(inputDeviceType).ToArray();
+
+            for (var i = 0; i < Buttons.Length; i++)
+            {
+                if (i < sprites.Length)
+                    Buttons[i].UpdateButtonInput(sprites[i]);
+            }
+        }
+
     }
 }

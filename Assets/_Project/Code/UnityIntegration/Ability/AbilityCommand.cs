@@ -3,11 +3,11 @@
     public class AbilityCommand
     {
         public event System.Action<int> AnimationHashRaised = delegate { };
-        private readonly AbilityData _data;
-        public float Duration => _data.Duration;
+        private readonly AbilityDataSO _dataSo;
+        public float Duration => _dataSo.Duration;
 
-        public AbilityCommand(AbilityData data) => _data = data;
+        public AbilityCommand(AbilityDataSO dataSo) => _dataSo = dataSo;
 
-        public void Execute() => AnimationHashRaised.Invoke(_data.AnimationHash);
+        public void Execute() => AnimationHashRaised.Invoke(_dataSo.AnimationHash);
     }
 }

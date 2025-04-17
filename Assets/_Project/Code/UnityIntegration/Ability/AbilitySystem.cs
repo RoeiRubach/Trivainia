@@ -5,11 +5,11 @@ namespace Trivainia
     public class AbilitySystem : MonoBehaviour
     {
         [SerializeField] private AbilityView _abilityView;
-        [SerializeField] private AbilityData[] _startingAbilities;
+        [SerializeField] private AbilityDataSO[] _startingAbilities;
 
         private void Start()
         {
-            _abilityView.SetupButtons(GetComponent<PlayerServiceLocator>().Input);
+            _abilityView.SetupView(GetComponent<PlayerServiceLocator>().Input);
             InitializeController();
         }
 

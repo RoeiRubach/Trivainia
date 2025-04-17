@@ -4,6 +4,7 @@
     "com.gitamend.improvedtimers": "https://github.com/adammyhre/Unity-Improved-Timers.git",
     "com.gitamend.unityutils": "https://github.com/adammyhre/Unity-Utils.git",
     "com.kyrylokuzyk.primetween": "file:../Assets/Plugins/PrimeTween/internal/com.kyrylokuzyk.primetween.tgz",
+    "com.unity.2d.sprite": "1.0.0",
     "com.unity.addressables": "2.4.2",
     "com.unity.ai.navigation": "2.0.5",
     "com.unity.cinemachine": "3.1.3",

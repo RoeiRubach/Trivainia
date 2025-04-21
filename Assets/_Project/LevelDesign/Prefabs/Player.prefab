@@ -623,6 +623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3500876289366042414}
+  - component: {fileID: 6828406701455524582}
   m_Layer: 0
   m_Name: Fireball start pivot
   m_TagString: Untagged
@@ -639,12 +640,27 @@ Transform:
   m_GameObject: {fileID: 7801086773465052725}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1126649257099112021}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6828406701455524582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7801086773465052725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a266f52dc744b6a309ed705f961472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 20
+  _color: {r: 1, g: 0, b: 0, a: 0.25}
+  _fireballStrategy: {fileID: 11400000, guid: 421f8057852a6e14da4c848c22bf5e5a, type: 2}
 --- !u!1 &8773502966423564587
 GameObject:
   m_ObjectHideFlags: 0

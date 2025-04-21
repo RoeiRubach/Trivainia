@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Origin: {fileID: 0}
   _fireballPrefab: {fileID: 4651898070695944339, guid: 5dcb1009215f702469acaca1675a0543, type: 3}
-  _searchRadius: 50
+  SearchRadius: 20
   _targetingLayer:
     serializedVersion: 2
     m_Bits: 64

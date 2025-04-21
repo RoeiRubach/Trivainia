@@ -7,10 +7,10 @@ namespace Trivainia
     public class FireballAbilityStrategy : AbilityExecutionStrategySO
     {
         [SerializeField, Required] private GameObject _fireballPrefab;
-        [SerializeField] private float _searchRadius = 15f;
+        public float SearchRadius = 15f;
         [SerializeField] private LayerMask _targetingLayer;
 
-        private readonly Collider[] _targetBuffer = new Collider[5];
+        private readonly Collider[] _targetBuffer = new Collider[50];
         
         public override void Execute()
         {
@@ -23,7 +23,7 @@ namespace Trivainia
 
         private Vector3 GetClosestTargetPosition(Vector3 origin)
         {
-            var hitCount = Physics.OverlapSphereNonAlloc(origin, _searchRadius, _targetBuffer, _targetingLayer);
+            var hitCount = Physics.OverlapSphereNonAlloc(origin, SearchRadius, _targetBuffer, _targetingLayer);
 
             var closestDistance = Mathf.Infinity;
             Transform closestTarget = null;

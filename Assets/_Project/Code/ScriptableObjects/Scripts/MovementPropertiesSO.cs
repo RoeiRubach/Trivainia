@@ -8,15 +8,18 @@ namespace Trivainia
     {
         [BoxGroup("Speed Settings"), MinValue(1)]
         public float MoveSpeed = 5f;
+        
+        [BoxGroup("Speed Settings"), MinValue(1)]
+        public float DashForce = 10f;
 
         //public float SprintSpeed = 8f;
         [BoxGroup("Speed Settings"), MinValue(1)]
         public float RotationSpeed = 5f;
 
-        [BoxGroup("Acceleration Settings"), MinValue(1)]
-        public float Acceleration = 10f;
+        [BoxGroup("Acceleration Settings"), PropertyRange(0.001f, 1f)]
+        public float Acceleration = 1f;
 
-        [BoxGroup("Acceleration Settings"), MinValue(1)]
-        public float Deceleration = 10f;
+        [BoxGroup("Acceleration Settings"), PropertyRange(0.001f, 1f)]
+        public float Deceleration = 1f;
     }
 }

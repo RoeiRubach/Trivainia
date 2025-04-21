@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using ImprovedTimers;
 
@@ -6,36 +7,38 @@ namespace Trivainia
 {
     public class AbilityCooldownManager
     {
-        private readonly CountdownTimer _timer = new(0);
+        private readonly Dictionary<int, CountdownTimer> _cooldowns = new();
 
-        public bool IsRunning => _timer.IsRunning;
+        public bool IsRunning(int index)
+            => _cooldowns.ContainsKey(index) && _cooldowns[index].IsRunning;
 
-        /// <summary>
-        /// Raised every frame with the cooldown progress [0-1].
-        /// </summary>
-        public event Action<float> ProgressChanged;
-
-        /// <summary>
-        /// Raised when cooldown finishes.
-        /// </summary>
-        public event Action CooldownEnded;
-
-        public bool CanQueue(float queueThreshold) => !_timer.IsRunning || _timer.Progress <= queueThreshold;
-
-        public async UniTask RunCooldown(float duration)
+        public bool CanQueue(int index, float queueThreshold)
         {
-            _timer.Reset(duration);
-            _timer.Start();
+            if (!_cooldowns.TryGetValue(index, out var timer))
+                return true;
 
-            while (_timer.IsRunning)
+            return !timer.IsRunning || timer.Progress <= queueThreshold;
+        }
+
+        public event Action<int, float> ProgressChanged;
+        public event Action<int> CooldownEnded;
+
+        public async UniTask RunCooldown(int index, float duration)
+        {
+            var timer = new CountdownTimer(duration);
+            _cooldowns[index] = timer;
+
+            timer.Start();
+            while (timer.IsRunning)
             {
-                _timer.Tick();
-                ProgressChanged?.Invoke(_timer.Progress);
+                timer.Tick();
+                ProgressChanged?.Invoke(index, timer.Progress);
                 await UniTask.Yield();
             }
 
-            ProgressChanged?.Invoke(0f);
-            CooldownEnded?.Invoke();
+            ProgressChanged?.Invoke(index, 0f);
+            CooldownEnded?.Invoke(index);
+            _cooldowns.Remove(index);
         }
     }
 }

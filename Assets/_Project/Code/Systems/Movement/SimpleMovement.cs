@@ -26,9 +26,11 @@ namespace Trivainia
 
         public Vector3 GetZeroVelocity() => Vector3.zero;
 
+        public void ApplyExternalVelocity(Vector3 velocity) => FinalVelocityComputed?.Invoke(velocity);
+
         public Vector3 ComputeSmoothedVelocity(Vector3 direction, Vector3 currentVelocity)
         {
-            var targetVelocity = direction * (PhysicsMoveSpeed * _timeService.GetFixedDeltaTime());
+            var targetVelocity = direction * (PhysicsMoveSpeed * _config.DashForce * _timeService.GetFixedDeltaTime());
 
             var acceleration = targetVelocity == Vector3.zero
                 ? PhysicsDeceleration
@@ -41,6 +43,9 @@ namespace Trivainia
             );
 
             FinalVelocityComputed?.Invoke(smoothedVelocity);
+
+            if (smoothedVelocity.sqrMagnitude < 0.0001f)
+                smoothedVelocity = Vector3.zero;
 
             return smoothedVelocity;
         }

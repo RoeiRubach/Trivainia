@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b7c7c6a013b9d40bbcc4db6d1a39ee, type: 3}
   m_Name: SkillBottom
   m_EditorClassIdentifier: 
-  AnimationClip: {fileID: 0}
-  AnimationHash: 0
-  Duration: 3
-  QueueThreshold: 0.25
+  AnimationClip: {fileID: 7400000, guid: aa754cc4d7091734db3ff0cdf28a5fc5, type: 2}
+  AnimationHash: 995914302
+  Duration: 4
+  CoyoteThreshold: 0.1
+  ExecutionStrategy: {fileID: 11400000, guid: 15198a752f003124a89eb3e021496062, type: 2}
   Icon: {fileID: 21300000, guid: ea8bd548fe4dfbb4cbafa032615a65c3, type: 3}

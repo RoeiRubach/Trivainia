@@ -1,6 +1,6 @@
 ﻿namespace Trivainia
 {
-    public class AbilityCommand
+    public class AbilityCommand : IAnimationCommand
     {
         public event System.Action<int> AnimationHashRaised = delegate { };
         private readonly AbilityDataSO _dataSo;
@@ -8,6 +8,10 @@
 
         public AbilityCommand(AbilityDataSO dataSo) => _dataSo = dataSo;
 
-        public void Execute() => AnimationHashRaised.Invoke(_dataSo.AnimationHash);
+        public void Execute()
+        {
+            _dataSo.ExecutionStrategy?.Execute();
+            AnimationHashRaised.Invoke(_dataSo.AnimationHash);
+        }
     }
 }

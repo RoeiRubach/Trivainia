@@ -22,15 +22,17 @@ namespace Trivainia
             for (var i = 0; i < Buttons.Length; i++)
             {
                 Buttons[i].Initialize(i, input);
-                UpdateRadial(0);
+                UpdateRadial(i, 0);
             }
         }
 
-        public void UpdateRadial(float progress)
+        public void UpdateRadial(int index, float progress)
         {
             if (float.IsNaN(progress))
                 progress = 0;
-            Array.ForEach(Buttons, button => button.UpdateRadialFill(progress));
+
+            if (index >= 0 && index < Buttons.Length)
+                Buttons[index].UpdateRadialFill(progress);
         }
 
         public void UpdateButtonSprites(List<Ability> abilities)
@@ -38,6 +40,8 @@ namespace Trivainia
             for (var i = 0; i < Buttons.Length; i++)
                 if (i < abilities.Count)
                     Buttons[i].UpdateButtonSprite(abilities[i].DataSo.Icon);
+                else
+                    Buttons[i].gameObject.SetActive(false);
         }
 
         public void UpdateButtonInputs(InputDeviceType inputDeviceType)

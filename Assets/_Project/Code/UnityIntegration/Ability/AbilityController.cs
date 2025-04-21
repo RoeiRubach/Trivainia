@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine.EventSystems;
 
 namespace Trivainia
@@ -41,20 +42,20 @@ namespace Trivainia
             if (!_model.TryGetAbility(index, out var ability))
                 return;
 
-            if (_cooldown.CanQueue(ability.DataSo.QueueThreshold))
-                _queue.Enqueue(ability.CreateCommand());
+            if (_cooldown.CanQueue(index, ability.DataSo.CoyoteThreshold))
+                _queue.Enqueue(index, ability.GetOrCreateCommand());
 
-            if (!_cooldown.IsRunning)
+            if (!_cooldown.IsRunning(index))
                 ExecuteNextAsync().Forget();
         }
-
+        
         private async UniTaskVoid ExecuteNextAsync()
         {
-            if (!_queue.TryDequeue(out var cmd))
+            if (!_queue.TryDequeue(out var queued))
                 return;
 
-            cmd.Execute();
-            await _cooldown.RunCooldown(cmd.Duration);
+            queued.Command.Execute();
+            await _cooldown.RunCooldown(queued.Index, queued.Command.Duration);
             ExecuteNextAsync().Forget();
         }
 
@@ -62,10 +63,10 @@ namespace Trivainia
         {
             private readonly AbilityModel _model = new();
 
-            public Builder WithAbilities(AbilityDataSO[] abilitiesData)
+            public Builder WithAbilities(AbilityDataSO[] abilitiesData, PlayerAnimatorController animator)
             {
                 foreach (var data in abilitiesData)
-                    _model.Add(new Ability(data));
+                    _model.Add(new Ability(data, animator));
 
                 return this;
             }

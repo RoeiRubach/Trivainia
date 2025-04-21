@@ -4,9 +4,29 @@ namespace Trivainia
 {
     public class AbilityQueue
     {
-        public bool IsEmpty => _commands.Count == 0;
-        private readonly Queue<AbilityCommand> _commands = new();
-        public void Enqueue(AbilityCommand command) => _commands.Enqueue(command);
-        public bool TryDequeue(out AbilityCommand command) => _commands.TryDequeue(out command);
+        private readonly Queue<QueuedAbility> _queuedAbilities = new();
+        public bool IsEmpty => _queuedAbilities.Count == 0;
+
+        public void Enqueue(int index, AbilityCommand command)
+        {
+            _queuedAbilities.Enqueue(new QueuedAbility(index, command));
+        }
+
+        public bool TryDequeue(out QueuedAbility ability)
+        {
+            return _queuedAbilities.TryDequeue(out ability);
+        }
+    }
+    
+    public readonly struct QueuedAbility
+    {
+        public readonly int Index;
+        public readonly AbilityCommand Command;
+
+        public QueuedAbility(int index, AbilityCommand command)
+        {
+            Index = index;
+            Command = command;
+        }
     }
 }

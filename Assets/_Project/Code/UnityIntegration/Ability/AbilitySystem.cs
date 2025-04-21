@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Trivainia
 {
     public class AbilitySystem : MonoBehaviour
     {
-        [SerializeField] private AbilityView _abilityView;
+        [SerializeField, Required] private AbilityView _abilityView;
         [SerializeField] private AbilityDataSO[] _startingAbilities;
 
         private void Start()
@@ -15,7 +16,7 @@ namespace Trivainia
 
         private void InitializeController() =>
             new AbilityController.Builder()
-                .WithAbilities(_startingAbilities)
+                .WithAbilities(_startingAbilities, FindAnyObjectByType<PlayerAnimatorController>())
                 .Build(_abilityView);
     }
 }

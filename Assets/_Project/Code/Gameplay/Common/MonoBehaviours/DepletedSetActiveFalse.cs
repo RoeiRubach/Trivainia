@@ -6,7 +6,11 @@ namespace Trivainia
     {
         private IResourceManageable _resource;
 
-        private void Start() => _resource.Depleted += OnDepleted;
+        private void Start()
+        {
+            _resource = GetComponent<IResourceManageable>();
+            _resource.Depleted += OnDepleted;
+        }
 
         private void OnDepleted() => gameObject.SetActive(false);
 

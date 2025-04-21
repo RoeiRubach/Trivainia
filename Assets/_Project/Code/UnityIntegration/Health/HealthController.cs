@@ -15,7 +15,7 @@ namespace Trivainia
             remove => _health.Depleted -= value;
         }
 
-        private void Start()
+        private void Awake()
         {
             _health = _locator.GetNewHealthService();
             _healthView.Initialize(_health);

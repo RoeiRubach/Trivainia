@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Trivainia
 {
-    [CreateAssetMenu(fileName = "DashSpellStrategy", menuName = "Scriptable Objects/Spells/DashSpellStrategy")]
+    [CreateAssetMenu(fileName = "DashSpellStrategy", menuName = "Scriptable Objects/Abilities/DashSpellStrategy")]
     public class DashAbilityStrategy : AbilityExecutionStrategySO
     {
         [SerializeField] private float _dashSpeed = 10f;

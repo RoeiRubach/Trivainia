@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Trivainia
 {
     public abstract class AbilityExecutionStrategySO : ScriptableObject
     {
-        public Transform Origin;
+        [SerializeField, Required] protected Transform Origin;
         public abstract void Execute();
     }
 }

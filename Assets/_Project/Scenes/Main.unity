@@ -781,7 +781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Animations>k__BackingField: {fileID: 611954780}
-  <MovementProperties>k__BackingField: {fileID: 11400000, guid: 5a85527559c7a0e44a79af8eee159ed0, type: 2}
+  <MovementConfig>k__BackingField: {fileID: 11400000, guid: 5a85527559c7a0e44a79af8eee159ed0, type: 2}
   _inputReaderSO: {fileID: 11400000, guid: 1a46dcb649ac771478344021f2711be3, type: 2}
 --- !u!114 &611954776
 MonoBehaviour:
@@ -6659,7 +6659,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 365ae9efe5073d44196536f50ea4fc6d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

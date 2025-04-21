@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 607aadeed29980c4793a62203962495f, type: 3}
-  m_Name: PlayerMovementProperties
+  m_Script: {fileID: 11500000, guid: 0c5208dea1f747dab5855c6a8a23c5bb, type: 3}
+  m_Name: HealingAbilityStrategy
   m_EditorClassIdentifier: 
-  MoveSpeed: 5
-  DashForce: 1
-  RotationSpeed: 7.5
-  Acceleration: 0.5
-  Deceleration: 0.5
+  Origin: {fileID: 0}
+  _amount: 20

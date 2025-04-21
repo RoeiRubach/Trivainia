@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41b7c7c6a013b9d40bbcc4db6d1a39ee, type: 3}
-  m_Name: SkillLeft
+  m_Script: {fileID: 11500000, guid: e933e2613c7447a6aae00664ee65fbbe, type: 3}
+  m_Name: DefaultDamage
   m_EditorClassIdentifier: 
-  AnimationClip: {fileID: 0}
-  AnimationHash: 0
-  Duration: 3
-  QueueThreshold: 0.25
-  ExecutionStrategy: {fileID: 0}
-  Icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  <Amount>k__BackingField: 10

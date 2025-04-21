@@ -16,6 +16,7 @@ namespace Trivainia
             _timeService = timeService;
 
             movement.FinalVelocityComputed += OnFinalVelocityComputed;
+            _rigidbody.freezeRotation = true;
         }
 
         private void OnFinalVelocityComputed(Vector3 velocity) => HandleHorizontalMovement(velocity);

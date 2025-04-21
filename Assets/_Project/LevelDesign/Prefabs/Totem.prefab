@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialDelay: 1
-  _tickInterval: 2
+  _tickInterval: 0.75
   _damageConfig: {fileID: 11400000, guid: b21f0a603c2b98d4094fe3ce37d54f03, type: 2}
 --- !u!1 &597810122195600916
 GameObject:

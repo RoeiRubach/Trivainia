@@ -5,7 +5,7 @@ namespace Trivainia
 {
     public class AbilitySystem : MonoBehaviour
     {
-        [SerializeField, Required] private AbilityView _abilityView;
+        [SerializeField, Required, SceneObjectsOnly] private AbilityView _abilityView;
         [SerializeField] private AbilityDataSO[] _startingAbilities;
 
         private void Start()

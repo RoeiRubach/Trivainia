@@ -6,7 +6,7 @@ namespace Trivainia
     public class HealthController : MonoBehaviour, IResourceManageable
     {
         [SerializeField, Required] private HealthView _healthView;
-        [SerializeField, Required] private HealthServiceLocator _locator;
+        [SerializeField, Required, SceneObjectsOnly] private HealthServiceLocator _locator;
         private IHealthService _health;
 
         private void Start()

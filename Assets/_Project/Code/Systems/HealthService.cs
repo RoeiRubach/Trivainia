@@ -4,10 +4,16 @@ namespace Trivainia
 {
     public class HealthService : IHealthService
     {
-        public event Action OnHealthChanged
+        public event Action HealthChanged
         {
-            add => _model.OnHealthChanged += value;
-            remove => _model.OnHealthChanged -= value;
+            add => _model.HealthChanged += value;
+            remove => _model.HealthChanged -= value;
+        }
+        
+        public event Action Depleted
+        {
+            add => _model.Depleted += value;
+            remove => _model.Depleted -= value;
         }
 
         private readonly HealthModel _model;

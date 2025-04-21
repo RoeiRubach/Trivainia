@@ -13,7 +13,7 @@ namespace Trivainia
         public void Initialize(IHealthService health)
         {
             _health = health;
-            _health.OnHealthChanged += OnHealthChanged;
+            _health.HealthChanged += OnHealthChanged;
             OnHealthChanged();
         }
 
@@ -26,7 +26,7 @@ namespace Trivainia
         private void OnDestroy()
         {
             if (_health != null)
-                _health.OnHealthChanged -= OnHealthChanged;
+                _health.HealthChanged -= OnHealthChanged;
         }
     }
 }

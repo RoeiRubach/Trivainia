@@ -4,7 +4,8 @@ namespace Trivainia
 {
     public class HealthModel
     {
-        public event System.Action OnHealthChanged = delegate { };
+        public event System.Action Depleted = delegate { };
+        public event System.Action HealthChanged = delegate { };
         public float Current { get; private set; }
         public float Max { get; }
 
@@ -29,6 +30,8 @@ namespace Trivainia
         {
             if (amount <= 0 || IsDepleted) return;
             Current = Mathf.Max(Current - amount, 0);
+            if(Current <= 0)
+                Depleted.Invoke();
             InvokeChange();
         }
 
@@ -38,6 +41,6 @@ namespace Trivainia
             InvokeChange();
         }
 
-        private void InvokeChange() => OnHealthChanged.Invoke();
+        private void InvokeChange() => HealthChanged.Invoke();
     }
 }

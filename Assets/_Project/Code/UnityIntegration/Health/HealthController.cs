@@ -8,6 +8,12 @@ namespace Trivainia
         [SerializeField, Required] private HealthView _healthView;
         [SerializeField, Required, SceneObjectsOnly] private HealthServiceLocator _locator;
         private IHealthService _health;
+        
+        public event System.Action Depleted
+        {
+            add => _health.Depleted += value;
+            remove => _health.Depleted -= value;
+        }
 
         private void Start()
         {

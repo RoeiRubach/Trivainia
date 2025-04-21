@@ -2,7 +2,8 @@
 {
     public interface IHealthService : IResourceManageable
     {
-        public event System.Action OnHealthChanged;
+        public event System.Action Depleted;
+        public event System.Action HealthChanged;
         public float Current { get; }
         public float Max { get; }
         public float Ratio { get; }

@@ -55,7 +55,7 @@ namespace Trivainia
                 return;
 
             queued.Command.Execute();
-            await _cooldown.RunCooldown(queued.Index, queued.Command.Duration);
+            await _cooldown.RunCooldown(queued.Index, queued.Command.CooldownDuration);
             ExecuteNextAsync().Forget();
         }
 

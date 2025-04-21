@@ -4,7 +4,7 @@
     {
         public event System.Action<int> AnimationHashRaised = delegate { };
         private readonly AbilityDataSO _dataSo;
-        public float Duration => _dataSo.Duration;
+        public float CooldownDuration => _dataSo.CooldownDuration;
 
         public AbilityCommand(AbilityDataSO dataSo) => _dataSo = dataSo;
 

@@ -8,7 +8,7 @@ namespace Trivainia
     {
         [VerticalGroup("row1/left")] public AnimationClip AnimationClip;
         [VerticalGroup("row1/left"), ReadOnly] public int AnimationHash;
-        
+
         private void OnValidate()
         {
             if (AnimationClip == null)

@@ -36,10 +36,12 @@ namespace Trivainia
             if (!_animator.HasState(DEFAULT_LAYER, animationHash))
             {
                 ConsoleLogger.PrintWarning($"Animator does not have state with hash {animationHash}");
+
                 return false;
             }
 
             _validHashes.Add(animationHash);
+
             return true;
         }
 
@@ -49,6 +51,7 @@ namespace Trivainia
                 return clipLength * TRANSITION_RATIO;
 
             ConsoleLogger.PrintWarning($"Missing clip length for hash {animationHash}. Defaulting to 0.25s.");
+
             return DEFAULT_FADE_DURATION;
         }
 

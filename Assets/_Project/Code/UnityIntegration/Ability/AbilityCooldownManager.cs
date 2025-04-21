@@ -9,8 +9,7 @@ namespace Trivainia
     {
         private readonly Dictionary<int, CountdownTimer> _cooldowns = new();
 
-        public bool IsRunning(int index)
-            => _cooldowns.ContainsKey(index) && _cooldowns[index].IsRunning;
+        public bool IsRunning(int index) => _cooldowns.ContainsKey(index) && _cooldowns[index].IsRunning;
 
         public bool CanQueue(int index, float queueThreshold)
         {
@@ -29,6 +28,7 @@ namespace Trivainia
             _cooldowns[index] = timer;
 
             timer.Start();
+
             while (timer.IsRunning)
             {
                 timer.Tick();

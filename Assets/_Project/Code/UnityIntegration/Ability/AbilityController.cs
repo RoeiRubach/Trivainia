@@ -48,7 +48,7 @@ namespace Trivainia
             if (!_cooldown.IsRunning(index))
                 ExecuteNextAsync().Forget();
         }
-        
+
         private async UniTaskVoid ExecuteNextAsync()
         {
             if (!_queue.TryDequeue(out var queued))

@@ -15,10 +15,11 @@ namespace Trivainia
         [SerializeField, Required] private PlayerInputSpritesLocator _inputSpritesLocator;
 
         private bool HasAtLeastOneButton() => Buttons is {Length: > 0};
-        
+
         public void SetupView(IInputReader input)
         {
             input.InputDeviceChanged += UpdateButtonInputs;
+
             for (var i = 0; i < Buttons.Length; i++)
             {
                 Buttons[i].Initialize(i, input);
@@ -49,11 +50,8 @@ namespace Trivainia
             var sprites = _inputSpritesLocator.GetSpritesClockwiseFromBottom(inputDeviceType).ToArray();
 
             for (var i = 0; i < Buttons.Length; i++)
-            {
                 if (i < sprites.Length)
                     Buttons[i].UpdateButtonInput(sprites[i]);
-            }
         }
-
     }
 }

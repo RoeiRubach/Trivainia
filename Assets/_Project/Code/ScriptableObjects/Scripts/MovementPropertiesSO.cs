@@ -8,7 +8,7 @@ namespace Trivainia
     {
         [BoxGroup("Speed Settings"), MinValue(1)]
         public float MoveSpeed = 5f;
-        
+
         [BoxGroup("Speed Settings"), MinValue(1)]
         public float DashForce = 10f;
 

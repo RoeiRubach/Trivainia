@@ -8,15 +8,12 @@ namespace Trivainia
     {
         [SerializeField, Required] private AbilitiesInputImagesSO _keyboardInputSprites;
         [SerializeField, Required] private AbilitiesInputImagesSO _controllerInputSprites;
-        
-        public IEnumerable<Sprite> GetSpritesClockwiseFromBottom(InputDeviceType deviceType)
-        {
-            return deviceType switch
-                   {
-                       InputDeviceType.KeyboardMouse   => _keyboardInputSprites.GetImagesClockwiseFromBottom(),
-                       InputDeviceType.Gamepad => _controllerInputSprites.GetImagesClockwiseFromBottom(),
-                       _                    => throw new System.ArgumentOutOfRangeException(nameof(deviceType), deviceType, null)
-                   };
-        }
+
+        public IEnumerable<Sprite> GetSpritesClockwiseFromBottom(InputDeviceType deviceType) =>
+            deviceType switch {
+                InputDeviceType.KeyboardMouse => _keyboardInputSprites.GetImagesClockwiseFromBottom(),
+                InputDeviceType.Gamepad       => _controllerInputSprites.GetImagesClockwiseFromBottom(),
+                _                             => throw new System.ArgumentOutOfRangeException(nameof(deviceType), deviceType, null)
+            };
     }
 }

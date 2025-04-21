@@ -14,6 +14,7 @@
         public AbilityCommand GetOrCreateCommand()
         {
             _command ??= new AbilityCommand(DataSo);
+
             return _command;
         }
     }

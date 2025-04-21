@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Trivainia
 {
     [CreateAssetMenu(fileName = "MovementPropertiesSO", menuName = "Scriptable Objects/MovementPropertiesSO")]
-    public class MovementPropertiesSO : ScriptableObject
+    public class MovementConfigSO : ScriptableObject
     {
         [BoxGroup("Speed Settings"), MinValue(1)]
         public float MoveSpeed = 5f;

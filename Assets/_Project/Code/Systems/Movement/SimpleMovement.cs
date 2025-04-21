@@ -10,10 +10,10 @@ namespace Trivainia
         public event Action<Quaternion> RotationComputed;
 
         private const float PHYSICS_MULTIPLIER = 100f;
-        private readonly MovementPropertiesSO _config;
+        private readonly MovementConfigSO _config;
         private readonly ITimeService _timeService;
 
-        public SimpleMovement(ITimeService timeService, MovementPropertiesSO config)
+        public SimpleMovement(ITimeService timeService, MovementConfigSO config)
         {
             _config = config;
             _timeService = timeService;

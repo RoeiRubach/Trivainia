@@ -12,7 +12,7 @@ namespace Trivainia
         public IMovementService MovementService { get; private set; }
 
         [field: SerializeField, Required] public PlayerAnimationsLocator Animations { get; private set; }
-        [field: SerializeField, Required] public MovementPropertiesSO MovementProperties { get; private set; }
+        [field: SerializeField, Required] public MovementConfigSO MovementConfig { get; private set; }
 
         [ValidateInput(nameof(ValidateInputReader), "Must implement IInputReader"),
          Tooltip("Drag a ScriptableObject that implements IInputReader"),
@@ -24,7 +24,7 @@ namespace Trivainia
             MainCamera = Camera.main.transform;
             TimeService = new UnityTime();
             Input = _inputReaderSO as IInputReader;
-            MovementService = new SimpleMovement(TimeService, MovementProperties);
+            MovementService = new SimpleMovement(TimeService, MovementConfig);
         }
 
         private bool ValidateInputReader(ScriptableObject so) => so is IInputReader;

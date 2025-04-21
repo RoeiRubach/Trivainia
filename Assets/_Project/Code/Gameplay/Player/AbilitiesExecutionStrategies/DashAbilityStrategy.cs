@@ -6,7 +6,8 @@ namespace Trivainia
     [CreateAssetMenu(fileName = "DashSpellStrategy", menuName = "Scriptable Objects/Abilities/DashSpellStrategy")]
     public class DashAbilityStrategy : AbilityExecutionStrategySO
     {
-        [SerializeField] private float _dashSpeed = 10f;
+        private const int PHYSICS_MULTIPLIER = 100;
+        [SerializeField, Min(0)] private float _dashForce = 2f;
         private ILocomotionService _locomotion;
 
         public override void Execute()
@@ -20,7 +21,7 @@ namespace Trivainia
 
             _locomotion ??= FindAnyObjectByType<PlayerServiceLocator>().MovementService;
 
-            _locomotion.ApplyExternalVelocity(_dashSpeed * Origin.forward);
+            _locomotion.ApplyExternalVelocity(_dashForce * PHYSICS_MULTIPLIER * Origin.forward);
         }
     }
 }

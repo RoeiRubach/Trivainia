@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DashAbilityStrategy
   m_EditorClassIdentifier: 
   Origin: {fileID: 0}
-  _dashSpeed: 100
+  _dashForce: 2

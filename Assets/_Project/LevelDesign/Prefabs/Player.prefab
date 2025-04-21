@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a266f52dc744b6a309ed705f961472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 20
+  _radius: 12.5
   _color: {r: 1, g: 0, b: 0, a: 0.25}
   _fireballStrategy: {fileID: 11400000, guid: 421f8057852a6e14da4c848c22bf5e5a, type: 2}
 --- !u!1 &8773502966423564587

@@ -8,6 +8,8 @@ namespace Trivainia
         private readonly Rigidbody _rigidbody;
         private readonly ITimeService _timeService;
 
+        public Vector3 GetCurrentVelocity => _rigidbody.linearVelocity;
+
         public RigidbodyApplier(Rigidbody rigidbody, ITimeService timeService, IMovementService movement)
         {
             _rigidbody = rigidbody;

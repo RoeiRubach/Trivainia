@@ -15,7 +15,7 @@ namespace Trivainia
 
         private void Start()
         {
-            _stateMachine.Setup(_locator);
+            _stateMachine.Setup(_locator, FindAnyObjectByType<PlayerAnimatorController>());
             _locator.Input.EnableActions();
         }
 

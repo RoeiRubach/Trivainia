@@ -11,6 +11,7 @@ namespace Trivainia
         public IMovementService MovementService { get; private set; }
         public Transform MainCamera { get; private set; }
 
+        [field: SerializeField, Required] public PlayerAnimationsLocator Animations { get; private set; }
         [field: SerializeField, Required] public MovementPropertiesSO MovementProperties { get; private set; }
 
         [ValidateInput(nameof(ValidateInputReader), "Must implement IInputReader"),

@@ -2,20 +2,20 @@
 
 namespace Trivainia
 {
-    public class MovingState : BaseState
+    public class MovingState : AnimationStateEnter
     {
         private readonly Transform _mainCamera;
         private readonly IInputReader _input;
         private readonly IMovementService _movement;
 
-        private Vector3 _currentVelocity;
+        public Vector3 CurrentVelocity { get; private set; }
         private Quaternion _currentRotation;
 
-        public MovingState(IInputReader input, IMovementService movement, Transform mainCamera)
+        public MovingState(MovementContext movementContext, AnimationContext animationContext) : base(animationContext)
         {
-            _input = input;
-            _movement = movement;
-            _mainCamera = mainCamera;
+            _input = movementContext.Input;
+            _movement = movementContext.Movement;
+            _mainCamera = movementContext.MainCamera;
         }
 
         public override void FixedUpdate()
@@ -46,6 +46,6 @@ namespace Trivainia
 
         private void UpdateRotation(Vector3 direction) => _currentRotation = _movement.ComputeSmoothRotation(_currentRotation, direction);
 
-        private void UpdateVelocity(Vector3 direction) => _currentVelocity = _movement.ComputeSmoothedVelocity(direction, _currentVelocity);
+        private void UpdateVelocity(Vector3 direction) => CurrentVelocity = _movement.ComputeSmoothedVelocity(direction, CurrentVelocity);
     }
 }

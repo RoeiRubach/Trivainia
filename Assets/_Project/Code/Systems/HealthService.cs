@@ -4,23 +4,24 @@ namespace Trivainia
 {
     public class HealthService : IHealthService
     {
-        private readonly HealthModel _model;
-
-        public float Current => _model.Current;
-        public float Max => _model.Max;
-        public bool IsDepleted => _model.IsDepleted;
-        public bool IsFull => _model.IsFull;
-
-        public event Action<float> OnHealthChanged
+        public event Action OnHealthChanged
         {
             add => _model.OnHealthChanged += value;
             remove => _model.OnHealthChanged -= value;
         }
 
+        private readonly HealthModel _model;
+        
+        public float Max => _model.Max;
+        public float Ratio => _model.Ratio;
+        public bool IsFull => _model.IsFull;
+        public float Current => _model.Current;
+        public bool IsDepleted => _model.IsDepleted;
+
         public HealthService(HealthConfigSO config) => _model = new HealthModel(config.InitialValue, config.MaxValue);
 
+        public void Reset() => _model.Reset();
         public void Restore(float amount) => _model.Restore(amount);
         public void Deplete(float amount) => _model.Deplete(amount);
-        public void Reset() => _model.Reset();
     }
 }

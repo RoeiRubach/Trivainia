@@ -10,8 +10,7 @@ namespace Trivainia
     {
         [field: SerializeField, ValidateInput(nameof(HasAtLeastOneButton), "At least one AbilityButton is required.")]
         public AbilityButton[] Buttons { get; private set; }
-
-        private AbilityView _abilityViewImplementation;
+        
         [SerializeField, Required] private PlayerInputSpritesLocator _inputSpritesLocator;
 
         private bool HasAtLeastOneButton() => Buttons is {Length: > 0};

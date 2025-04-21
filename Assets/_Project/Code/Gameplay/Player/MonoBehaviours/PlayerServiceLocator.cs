@@ -7,9 +7,9 @@ namespace Trivainia
     public class PlayerServiceLocator : MonoBehaviour
     {
         public IInputReader Input { get; private set; }
+        public Transform MainCamera { get; private set; }
         public ITimeService TimeService { get; private set; }
         public IMovementService MovementService { get; private set; }
-        public Transform MainCamera { get; private set; }
 
         [field: SerializeField, Required] public PlayerAnimationsLocator Animations { get; private set; }
         [field: SerializeField, Required] public MovementPropertiesSO MovementProperties { get; private set; }

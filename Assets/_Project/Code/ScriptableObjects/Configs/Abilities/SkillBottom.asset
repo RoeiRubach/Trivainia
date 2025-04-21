@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnimationClip: {fileID: 7400000, guid: aa754cc4d7091734db3ff0cdf28a5fc5, type: 2}
   AnimationHash: 995914302
-  CooldownDuration: 4
-  CoyoteThreshold: 0.1
+  CooldownDuration: 1
+  CoyoteThreshold: 0.15
   ExecutionStrategy: {fileID: 11400000, guid: 15198a752f003124a89eb3e021496062, type: 2}
   Icon: {fileID: 21300000, guid: ea8bd548fe4dfbb4cbafa032615a65c3, type: 3}

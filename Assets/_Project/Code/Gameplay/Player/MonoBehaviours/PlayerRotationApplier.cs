@@ -1,4 +1,3 @@
-using Sirenix.OdinInspector;
 using Trivainia;
 using UnityEngine;
 

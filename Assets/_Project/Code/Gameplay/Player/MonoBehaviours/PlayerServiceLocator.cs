@@ -16,7 +16,7 @@ namespace Trivainia
 
         private void OnValidate()
         {
-            if (_inputReaderSO != null && ValidateInputReader(_inputReaderSO))
+            if (_inputReaderSO != null && !ValidateInputReader(_inputReaderSO))
                 ConsoleLogger.PrintError("Must implement IInputReader. Drag a ScriptableObject that implements IInputReader - Assets/_Project/Code/ScriptableObjects/Configs");
         }
 

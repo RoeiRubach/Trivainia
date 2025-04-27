@@ -9,7 +9,7 @@ namespace Trivainia
             add => _model.HealthChanged += value;
             remove => _model.HealthChanged -= value;
         }
-        
+
         public event Action Depleted
         {
             add => _model.Depleted += value;
@@ -17,7 +17,7 @@ namespace Trivainia
         }
 
         private readonly HealthModel _model;
-        
+
         public float Max => _model.Max;
         public float Ratio => _model.Ratio;
         public bool IsFull => _model.IsFull;

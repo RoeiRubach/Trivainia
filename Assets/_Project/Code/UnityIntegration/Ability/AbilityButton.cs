@@ -1,5 +1,4 @@
 using System;
-using Sirenix.OdinInspector;
 using Trivainia.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,10 +7,10 @@ namespace Trivainia
 {
     public class AbilityButton : MonoBehaviour
     {
-        [SerializeField, ReadOnly] private int _index;
-        [SerializeField, Required] private Image _radialImage;
-        [SerializeField, Required] private Image _abilityIcon;
-        [SerializeField, Required] private Image _abilityInput;
+        [SerializeField] private int _index;
+        [SerializeField] private Image _radialImage;
+        [SerializeField] private Image _abilityIcon;
+        [SerializeField] private Image _abilityInput;
 
         public event Action<int> OnButtonPressed = delegate { };
 

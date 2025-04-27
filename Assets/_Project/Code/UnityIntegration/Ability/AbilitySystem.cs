@@ -1,11 +1,10 @@
-﻿using Sirenix.OdinInspector;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Trivainia
 {
     public class AbilitySystem : MonoBehaviour
     {
-        [SerializeField, Required, SceneObjectsOnly] private AbilityView _abilityView;
+        [SerializeField] private AbilityView _abilityView;
         [SerializeField] private AbilityDataSO[] _startingAbilities;
 
         private void Start()

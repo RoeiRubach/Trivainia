@@ -6,7 +6,7 @@ namespace Trivainia
     public class SearchRadiusGizmo : MonoBehaviour
     {
         [SerializeField] private float _radius = 15f;
-        [SerializeField] private Color _color = new Color(1f, 0f, 0f, 0.25f);
+        [SerializeField] private Color _color = new(1f, 0f, 0f, 0.25f);
         [SerializeField] private FireballAbilityStrategy _fireballStrategy;
 
         private void OnValidate() => _fireballStrategy.SearchRadius = _radius;

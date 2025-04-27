@@ -1,13 +1,12 @@
-﻿using Sirenix.OdinInspector;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Trivainia
 {
     [CreateAssetMenu(menuName = "Scriptable Objects/Health Config")]
     public class HealthConfigSO : ScriptableObject
     {
-        [SerializeField, MinValue(1)] private float _initialValue;
-        [SerializeField, MinValue(1)] private float _maxValue;
+        [SerializeField, Min(1)] private float _initialValue;
+        [SerializeField, Min(1)] private float _maxValue;
 
         private void OnValidate()
         {

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Trivainia
@@ -7,7 +6,7 @@ namespace Trivainia
     public class FireballController : MonoBehaviour
     {
         private Rigidbody _rigidbody;
-        [SerializeField, Required] private FireballConfigSO _damageConfig;
+        [SerializeField] private FireballConfigSO _damageConfig;
         private float _hitRadius;
 
         private Vector3 _direction;
@@ -46,7 +45,7 @@ namespace Trivainia
         {
             _direction = (targetPosition - transform.position).normalized;
             transform.forward = _direction;
-            
+
             _rigidbody.linearVelocity = _direction * _damageConfig.MoveSpeed;
             Invoke(nameof(DestroySelf), _damageConfig.LifeTime);
         }

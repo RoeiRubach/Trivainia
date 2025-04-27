@@ -1,5 +1,4 @@
-﻿using Sirenix.OdinInspector;
-using Trivainia.Utilities;
+﻿using Trivainia.Utilities;
 using UnityEngine;
 
 namespace Trivainia
@@ -11,13 +10,15 @@ namespace Trivainia
         public ITimeService TimeService { get; private set; }
         public IMovementService MovementService { get; private set; }
 
-        [field: SerializeField, Required] public PlayerAnimationsLocator Animations { get; private set; }
-        [field: SerializeField, Required] public MovementConfigSO MovementConfig { get; private set; }
+        [field: SerializeField] public PlayerAnimationsLocator Animations { get; private set; }
+        [field: SerializeField] public MovementConfigSO MovementConfig { get; private set; }
+        [SerializeField] private ScriptableObject _inputReaderSO;
 
-        [ValidateInput(nameof(ValidateInputReader), "Must implement IInputReader"),
-         Tooltip("Drag a ScriptableObject that implements IInputReader"),
-         SerializeField, AssetSelector(Paths = "Assets/_Project/Code/ScriptableObjects/Configs")]
-        private ScriptableObject _inputReaderSO;
+        private void OnValidate()
+        {
+            if (_inputReaderSO != null && ValidateInputReader(_inputReaderSO))
+                ConsoleLogger.PrintError("Must implement IInputReader. Drag a ScriptableObject that implements IInputReader - Assets/_Project/Code/ScriptableObjects/Configs");
+        }
 
         private void Awake()
         {
@@ -27,6 +28,6 @@ namespace Trivainia
             MovementService = new SimpleMovement(TimeService, MovementConfig);
         }
 
-        private bool ValidateInputReader(ScriptableObject so) => so is IInputReader;
+        private static bool ValidateInputReader(ScriptableObject so) => so is IInputReader;
     }
 }

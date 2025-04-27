@@ -30,7 +30,7 @@ namespace Trivainia
         {
             if (amount <= 0 || IsDepleted) return;
             Current = Mathf.Max(Current - amount, 0);
-            if(Current <= 0)
+            if (Current <= 0)
                 Depleted.Invoke();
             InvokeChange();
         }

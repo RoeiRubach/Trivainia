@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector;
+using Trivainia.Utilities;
 using UnityEngine;
 
 namespace Trivainia
 {
     public class AbilityView : MonoBehaviour
     {
-        [field: SerializeField, ValidateInput(nameof(HasAtLeastOneButton), "At least one AbilityButton is required.")]
-        public AbilityButton[] Buttons { get; private set; }
-        
-        [SerializeField, Required] private PlayerInputSpritesLocator _inputSpritesLocator;
+        [field: SerializeField] public AbilityButton[] Buttons { get; private set; }
+
+        [SerializeField] private PlayerInputSpritesLocator _inputSpritesLocator;
+
+        private void OnValidate()
+        {
+            if (HasAtLeastOneButton())
+                ConsoleLogger.PrintWarning("At least one AbilityButton is required.");
+        }
 
         private bool HasAtLeastOneButton() => Buttons is {Length: > 0};
 

@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Trivainia
 {
     public class PlayerInputSpritesLocator : MonoBehaviour
     {
-        [SerializeField, Required] private AbilitiesInputImagesSO _keyboardInputSprites;
-        [SerializeField, Required] private AbilitiesInputImagesSO _controllerInputSprites;
+        [SerializeField] private AbilitiesInputImagesSO _keyboardInputSprites;
+        [SerializeField] private AbilitiesInputImagesSO _controllerInputSprites;
 
         public IEnumerable<Sprite> GetSpritesClockwiseFromBottom(InputDeviceType deviceType) =>
             deviceType switch {

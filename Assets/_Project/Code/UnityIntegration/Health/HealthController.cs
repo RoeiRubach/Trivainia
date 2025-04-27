@@ -1,14 +1,13 @@
-﻿using Sirenix.OdinInspector;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Trivainia
 {
     public class HealthController : MonoBehaviour, IResourceManageable
     {
-        [SerializeField, Required] private HealthView _healthView;
-        [SerializeField, Required, SceneObjectsOnly] private HealthServiceLocator _locator;
+        [SerializeField] private HealthView _healthView;
+        [SerializeField] private HealthServiceLocator _locator;
         private IHealthService _health;
-        
+
         public event System.Action Depleted
         {
             add => _health.Depleted += value;

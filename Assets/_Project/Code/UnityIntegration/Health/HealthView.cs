@@ -1,12 +1,11 @@
-﻿using Sirenix.OdinInspector;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Trivainia
 {
     public class HealthView : MonoBehaviour
     {
-        [SerializeField, Required] private Image _fillImage;
+        [SerializeField] private Image _fillImage;
 
         private IHealthService _health;
 

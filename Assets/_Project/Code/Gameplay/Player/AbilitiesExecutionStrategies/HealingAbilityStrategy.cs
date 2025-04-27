@@ -7,6 +7,7 @@ namespace Trivainia
     {
         [SerializeField, Min(0)] private float _amount = 20;
         private IResourceManageable _resourceManageable;
+
         public override void Execute()
         {
             _resourceManageable ??= Origin.GetComponentInChildren<IResourceManageable>();

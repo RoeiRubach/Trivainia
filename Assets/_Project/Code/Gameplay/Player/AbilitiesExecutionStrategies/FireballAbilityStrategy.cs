@@ -1,17 +1,16 @@
-﻿using Sirenix.OdinInspector;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Trivainia
 {
     [CreateAssetMenu(fileName = "FireballAbilityStrategy", menuName = "Scriptable Objects/Abilities/FireballAbilityStrategy")]
     public class FireballAbilityStrategy : AbilityExecutionStrategySO
     {
-        [SerializeField, Required] private GameObject _fireballPrefab;
+        [SerializeField] private GameObject _fireballPrefab;
         public float SearchRadius = 15f;
         [SerializeField] private LayerMask _targetingLayer;
 
         private readonly Collider[] _targetBuffer = new Collider[50];
-        
+
         public override void Execute()
         {
             var originPosition = Origin.position;

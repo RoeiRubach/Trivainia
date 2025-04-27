@@ -1,5 +1,4 @@
-﻿using Sirenix.OdinInspector;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Trivainia
 {
@@ -9,6 +8,6 @@ namespace Trivainia
         [field: SerializeField, Min(1)] public int MaxTargets { get; private set; }
         [field: SerializeField, Min(5)] public float LifeTime { get; private set; }
         [field: SerializeField, Min(5)] public float MoveSpeed { get; private set; }
-        [field: SerializeField, Required] public LayerMask TargetingLayer { get; private set; }
+        [field: SerializeField] public LayerMask TargetingLayer { get; private set; }
     }
 }

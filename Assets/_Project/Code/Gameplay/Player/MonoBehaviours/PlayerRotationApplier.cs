@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerRotationApplier : MonoBehaviour
 {
-    [SerializeField, Required] private PlayerServiceLocator _locator;
+    [SerializeField] private PlayerServiceLocator _locator;
     private Transform _transform;
 
     private void Awake() => _transform = transform;

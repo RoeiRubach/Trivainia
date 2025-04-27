@@ -14,7 +14,7 @@ namespace Trivainia
 
         private void OnValidate()
         {
-            if (HasAtLeastOneButton())
+            if (!HasAtLeastOneButton())
                 ConsoleLogger.PrintWarning("At least one AbilityButton is required.");
         }
 

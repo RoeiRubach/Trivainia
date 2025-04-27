@@ -4,7 +4,7 @@ namespace Trivainia
 {
     public abstract class AbilityExecutionStrategySO : ScriptableObject
     {
-        public Transform Origin;
+        protected Transform Origin = null;
         public abstract void Execute();
     }
 }

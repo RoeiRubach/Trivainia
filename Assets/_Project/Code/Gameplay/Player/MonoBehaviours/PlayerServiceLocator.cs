@@ -5,6 +5,7 @@ namespace Trivainia
 {
     public class PlayerServiceLocator : MonoBehaviour
     {
+        [SerializeField] private Transform _fireBallSocket;
         public IInputReader Input { get; private set; }
         public Transform MainCamera { get; private set; }
         public ITimeService TimeService { get; private set; }
@@ -29,5 +30,7 @@ namespace Trivainia
         }
 
         private static bool ValidateInputReader(ScriptableObject so) => so is IInputReader;
+
+        public Transform GetFireBallSocket() => _fireBallSocket;
     }
 }

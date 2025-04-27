@@ -1,5 +1,4 @@
-﻿using Trivainia.Utilities;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Trivainia
 {
@@ -12,15 +11,9 @@ namespace Trivainia
 
         public override void Execute()
         {
-            if (Origin == null)
-            {
-                ConsoleLogger.PrintWarning("DashAbility: Origin is not assigned.");
-
-                return;
-            }
-
+            if(Origin == null)
+                Origin = FindAnyObjectByType<PlayerController>().transform;
             _locomotion ??= FindAnyObjectByType<PlayerServiceLocator>().MovementService;
-
             _locomotion.ApplyExternalVelocity(_dashForce * PHYSICS_MULTIPLIER * Origin.forward);
         }
     }

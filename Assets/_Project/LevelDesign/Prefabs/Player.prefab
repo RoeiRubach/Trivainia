@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b33cbb94beb44a690522e3042afc6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fireBallSocket: {fileID: 3500876289366042414}
   <Animations>k__BackingField: {fileID: 3428462078565055926}
   <MovementConfig>k__BackingField: {fileID: 11400000, guid: 5a85527559c7a0e44a79af8eee159ed0, type: 2}
   _inputReaderSO: {fileID: 11400000, guid: 1a46dcb649ac771478344021f2711be3, type: 2}

@@ -13,6 +13,8 @@ namespace Trivainia
 
         public override void Execute()
         {
+            if(Origin == null || Origin != FindAnyObjectByType<PlayerServiceLocator>().GetFireBallSocket())
+                Origin = FindAnyObjectByType<PlayerServiceLocator>().GetFireBallSocket();
             var originPosition = Origin.position;
             var targetPosition = GetClosestTargetPosition(originPosition);
 
